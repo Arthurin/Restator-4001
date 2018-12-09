@@ -1,20 +1,20 @@
 
-var niveau = 1;
-var capital = 0;
+var niveau = 301;
+var capital = 1415;
 // carac: pt de competence utilisé par competence
 // min: minimum en pt de compétence,
 // pt: nb de pt de compétence,
 // capital: point de capital utilisé
-var caractere = {"Vie":{"min":100, "pt":100, "capital":0},
+var caractere = {"Vie":{"min":100, "pt":1200, "capital":50},
                  "Force":{"min":0, "pt":0, "capital":0},
                  "Sagesse":{"min":0, "pt":0, "capital":0},
                  "Agilite":{"min":0, "pt":0, "capital":0},
                  "Resistance":{"min":0, "pt":0, "capital":0},
-                 "Science":{"min":0, "pt":0, "capital":0},
+                 "Science":{"min":0, "pt":600, "capital":700},
                  "Magie":{"min":0, "pt":0, "capital":0},
                  "Frequence":{"min":100, "pt":100, "capital":0},
-                 "TP":{"min":10, "pt":10, "capital":0},
-                 "MP":{"min":3, "pt":3, "capital":0}};
+                 "TP":{"min":10, "pt":20, "capital":525},
+                 "MP":{"min":3, "pt":7, "capital":140}};
 
 
 weapons["0"] = {"name":"--", "level":0};
@@ -62,7 +62,7 @@ function initCaracteres() {
     let lediv = "";
     for (let car in caractere) {
         lediv += "<div>";
-        lediv += "<label id=\"" + car + "label\">" + car + " : " + caractere[car]["min"] + "</label>";
+        lediv += "<label id=\"" + car + "label\">" + car + " : " + caractere[car]["pt"] + "</label>";
         lediv += "<button id=\"" + car + "plusun\" onclick='majCaracteristique(\"" + car + "\", 1)'>+1</button>";
         lediv += "<button id=\"" + car + "moinsun\" disabled onclick='majCaracteristique(\"" + car + "\", -1)'>-1</button>";
         lediv += "<button id=\"" + car + "plusdix\" onclick='majCaracteristique(\"" + car + "\", 10)'>+10</button>";
@@ -448,6 +448,8 @@ function majItem(genre, liste, ligne) {
                     if ((type == 4 && effect["id"] == 5) || type == 6)
                         maj[type]["txt"] += "%";
                 }
+				maj[type]["txt"] += " ("+parseInt(lemin * (1 + caractere[maj[type]["factor"]]["pt"]/100) * 1.4);
+				maj[type]["txt"] += " - "+parseInt((lemin+ledelta) * (1 + caractere[maj[type]["factor"]]["pt"]/100) * 1.4) +")";
             }
             // complément d'info sur l'effet
             if (effect["turns"] > 0 || type == 9 || type == 3 || effect["targets"] < 31) {
