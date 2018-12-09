@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="restator.css">
+    <script src="restator-data.js"></script>
+    <script src="restator.js"></script>
+    <title>Restator 4000</title>
+  </head>
+  
+  <body onload='initNiveau(); initCaracteres(); initArmes(); initPuces();'>
+    <h1>Restator 4000</h1>
+    <h2>Simulateur de <a href="https://leekwars.com">poireau</a></h2>
+    <hr />
+    <div id="niveau">
+    </div>
+    <hr />
+    <label id="capitallabel"></label>
+    <hr />
+    <div id="caracteres">      
+    </div>
+    <hr />
+    <div id="armes">
+      <p>Armes</p>
+      <table id="armetable">
+      </table>
+    </div>
+    <hr />
+    <div id="puces">
+      <p>Puces</p>
+      <table id="pucetable">
+      </table>
+    </div>
+    <hr />
+    <div id="legende">
+      <p>Légende :</p>
+      <p>
+        «1T», «2T», «3T»,...: durée de l'effet sur 1 tour, 2 tours, 3 tours,...<br />
+        «EACPB»: cibles : E=ennemis, A=Alliers, C=caster (soi-même), P=poireau, B=bulbe.<br />
+        «los»: la cellule cible doit être en vue.<br />
+        «laser»: item de type laser ; traverse les bulbes et les poireaux.<br />
+        «Z1», «Z2», «Z3»: item à effet de zone ; les cellules à une distance inférieure ou égale à 1, 2 ou 3 seront touchées (puissance décroissante avec la distance).<br />
+        «n (p) [k]»: pour les cooldowns. n: cooldown normal, p: cooldown initial, k: cooldown de team.
+      </p>
+    </div>
+  </body>
+</html>
