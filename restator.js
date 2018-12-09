@@ -486,7 +486,11 @@ function majItem(genre, liste, ligne) {
                         maj[type]["txt"] += "%";
                 }
 				maj[type]["txt"] += " ("+parseInt(lemin * (1 + caractere[maj[type]["factor"]]["pt"]/100) * 1.4);
-				maj[type]["txt"] += " - "+parseInt((lemin+ledelta) * (1 + caractere[maj[type]["factor"]]["pt"]/100) * 1.4) +")";
+                if (ledelta > 0) {
+				    maj[type]["txt"] += " - "+parseInt((lemin+ledelta) * (1 + caractere[maj[type]["factor"]]["pt"]/100) * 1.4) +")";
+                } else {
+                    maj[type]["txt"] += ")";
+                }
             }
             // complément d'info sur l'effet
             if (effect["turns"] > 0 || type == 9 || type == 3 || effect["targets"] < 31) {
