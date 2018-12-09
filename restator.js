@@ -35,10 +35,12 @@ var selectedChips = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var index2chip = new Array();
 
 function sauvegarder() {
+    console.log(selectedChips);
     localStorage.setItem('niveau', JSON.stringify(niveau));
     localStorage.setItem('caractere', JSON.stringify(caractere));
     localStorage.setItem('selectedChips', JSON.stringify(selectedChips));
-    localStorage.setItem('index2chip', JSON.stringify(index2chip));
+    localStorage.setItem('selectedWeapons', JSON.stringify(selectedWeapons));
+    console.log(JSON.stringify(selectedWeapons));
 }
 
 function charger() {
@@ -46,12 +48,25 @@ function charger() {
         niveau = JSON.parse(localStorage.getItem('niveau'));
         caractere = JSON.parse(localStorage.getItem('caractere'));
         selectedChips = JSON.parse(localStorage.getItem('selectedChips'));
-        index2chip = JSON.parse(localStorage.getItem('index2chip'));
+        selectedWeapons = JSON.parse(localStorage.getItem('selectedWeapons'));   
+        setItems();     
         majNiveau(0);
         majCapital();
         majToutesCaracteristiques();
         majToutesArmes(-1);
         majToutesPuces(-1);
+    }
+}
+
+function setItems(){
+    console.log(selectedChips);
+    for (const [index, value] of selectedChips.entries()) {
+        console.log(index + " : " + value);
+        document.getElementById("puce" + index).value=value;
+    }
+    for (const [index, value] of selectedWeapons.entries()) {
+        console.log(index + " : " + value);
+        document.getElementById("arme" + index).value=value;
     }
 }
 
@@ -379,7 +394,7 @@ function majToutesArmes(fromLine) {
  * MaJ d'une Puce
  */
 function majPuce(ligne) {
-    //console.log("maj puce: " + ligne);
+    console.log("maj puce: " + ligne);
     selectedChips[ligne] = majItem("puce", chips, ligne);
     majToutesPuces(ligne);
 }
@@ -428,7 +443,7 @@ function majToutesPuces(fromLine) {
  * MaJ d'un Item
  */
 function majItem(genre, liste, ligne) {
-    //console.log("maj item: genre: " + genre + " liste: " + liste + " ligne: " +ligne);
+    console.log("maj item: genre: " + genre + " liste: " + liste + " ligne: " +ligne);
     let i = document.getElementById(genre + ligne).selectedIndex;
     let item = document.getElementById(genre + ligne).options[i].value;
     let maj = {1:{"txt":"", "factor":"Force",   "balise":"damage"},
