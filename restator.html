@@ -7,13 +7,15 @@
     <title>Restator 4000</title>
   </head>
   
-  <body onload='initNiveau(); initCaracteres(); initArmes(); initPuces();'>
+  <body onload='initNiveau(); initCaracteres(); initArmes(); initPuces();majNiveau(0);majCapital();majToutesCaracteristiques();'>
     <h1>Restator 4000</h1>
     <h2>Simulateur de <a href="https://leekwars.com">poireau</a></h2>
     <hr />
+    <button id="sauvegarde" onclick='sauvegarder()'>Sauvegarder</button>
+    <button id="charge" onclick='charger()'>Charger</button>
+    <hr />
     <div id="niveau">
     </div>
-    <hr />
     <label id="capitallabel"></label>
     <hr />
     <div id="caracteres">      

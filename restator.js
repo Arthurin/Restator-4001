@@ -34,6 +34,26 @@ chips["-9"] = {"name":"##### Entraves #####", "level":0, "effects":[{"type":9}]}
 var selectedChips = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var index2chip = new Array();
 
+function sauvegarder() {
+    localStorage.setItem('niveau', JSON.stringify(niveau));
+    localStorage.setItem('caractere', JSON.stringify(caractere));
+    localStorage.setItem('selectedChips', JSON.stringify(selectedChips));
+    localStorage.setItem('index2chip', JSON.stringify(index2chip));
+}
+
+function charger() {
+    if(localStorage.getItem('niveau')) {
+        niveau = JSON.parse(localStorage.getItem('niveau'));
+        caractere = JSON.parse(localStorage.getItem('caractere'));
+        selectedChips = JSON.parse(localStorage.getItem('selectedChips'));
+        index2chip = JSON.parse(localStorage.getItem('index2chip'));
+        majNiveau(0);
+        majCapital();
+        majToutesCaracteristiques();
+        majToutesArmes(-1);
+        majToutesPuces(-1);
+    }
+}
 
 /*
  * Initialisation du Niveau
@@ -262,7 +282,7 @@ function majCapital() {
  * MaJ d'un Caractere
  */
 function majCaracteristique(type, add) {
-    //console.log("maj caracteristique: type: "+type+", add:" + add);
+    console.log("maj caracteristique: type: "+type+", add:" + add);
     let coty = caractere[type]["pt"] + add;
     let cout = getCaractereCost(type,coty) - getCaractereCost(type,caractere[type]["pt"]);
     while (parseInt(cout) != cout) {
@@ -287,7 +307,7 @@ function majCaracteristique(type, add) {
  * MaJ de tous les Caracteres
  */
 function majToutesCaracteristiques() {
-    //console.log("majAll: caracteristique");
+    console.log("majAll: caracteristique");
     for (let car in caractere) {
         document.getElementById(car + "plusun").disabled = (getMaxCapitalPt(niveau) < capital - caractere[car]["capital"] + getCaractereCost(car,caractere[car]["pt"]+1));
         document.getElementById(car + "moinsun").disabled = (caractere[car]["pt"] == caractere[car]["min"]);
@@ -295,6 +315,8 @@ function majToutesCaracteristiques() {
         document.getElementById(car + "moinsdix").disabled = (caractere[car]["pt"] < caractere[car]["min"] + 10 );
         document.getElementById(car + "pluscent").disabled = (getMaxCapitalPt(niveau) < capital - caractere[car]["capital"] + getCaractereCost(car,caractere[car]["pt"]+100));
         document.getElementById(car + "moinscent").disabled = (caractere[car]["pt"] < caractere[car]["min"] + 100);
+        document.getElementById(car + "label").innerHTML = car + ' : ' + caractere[car]["pt"];
+        document.getElementById(car + "capitallabel").innerHTML = '(' + caractere[car]["capital"] + ')';
     }
     for (let k=0; k<4; k++) majArme(k);
     for (let k=0; k<15; k++) majPuce(k);
